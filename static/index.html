@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>JobPilot · Career Assistant for Sri Lankan Students</title>
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <span class="logo">J</span>
+      <div>
+        <h1>JobPilot</h1>
+        <p>Career assistant for Sri Lankan university students</p>
+      </div>
+    </div>
+    <div class="header-controls">
+      <label class="toggle" title="Use the smaller Gemma model: much faster on laptops, less detailed answers">
+        <input type="checkbox" id="fast-mode"> ⚡ Fast mode
+      </label>
+      <div class="status" id="status" hidden>
+        <span class="dot"></span><span id="status-text"></span>
+      </div>
+    </div>
+  </header>
+
+  <p class="privacy">🔒 Your CV never leaves this laptop. JobPilot runs an open-weight Gemma model locally with Ollama.</p>
+
+  <main class="layout">
+    <section class="inputs">
+      <div class="card">
+        <h2><span class="step">1</span> Your CV</h2>
+        <label class="upload">
+          <input type="file" id="cv-file" accept=".pdf,.docx,.txt,.md">
+          <span>Upload PDF, DOCX or TXT</span>
+        </label>
+        <textarea id="cv-text" rows="10" placeholder="…or paste your CV text here"></textarea>
+        <div class="chips" id="cv-skills"></div>
+      </div>
+
+      <div class="card">
+        <h2><span class="step">2</span> Job description</h2>
+        <textarea id="job-text" rows="10" placeholder="Paste the internship or job description, or pick one from Find jobs"></textarea>
+      </div>
+    </section>
+
+    <section class="workspace card">
+      <nav class="tabs" role="tablist">
+        <button class="tab active" data-tab="analyze">Match &amp; gaps</button>
+        <button class="tab" data-tab="rewrite">Rewrite</button>
+        <button class="tab" data-tab="interview">Interview practice</button>
+        <button class="tab" data-tab="chat">Ask JobPilot</button>
+        <button class="tab" data-tab="jobs">Find jobs</button>
+      </nav>
+
+      <div class="panel active" id="panel-analyze">
+        <p class="hint">Compare your CV with the job description: skills you match, skills you're missing, and questions they might ask.</p>
+        <button class="primary" id="analyze-btn">Compare my CV with this job</button>
+        <div class="result">
+          <div id="keyword-result"></div>
+          <div id="analyze-result"></div>
+          <div id="questions-result"></div>
+        </div>
+      </div>
+
+      <div class="panel" id="panel-rewrite">
+        <p class="hint">Paste a project or experience description and get a stronger, CV-ready version.</p>
+        <textarea id="rewrite-text" rows="6" placeholder="e.g. Made a website for our university club using React and Firebase where members can register for events."></textarea>
+        <input id="rewrite-role" type="text" placeholder="Target role (optional), e.g. Software Engineering Intern">
+        <button class="primary" id="rewrite-btn">Rewrite my project description</button>
+        <div id="rewrite-result"></div>
+      </div>
+
+      <div class="panel" id="panel-interview">
+        <p class="hint">Practice an answer and get honest feedback. Run "Match &amp; gaps" first to get questions tailored to this job.</p>
+        <div id="question-list" class="question-list"></div>
+        <input id="iv-question" type="text" placeholder="Interview question">
+        <textarea id="iv-answer" rows="6" placeholder="Type your answer the way you would say it"></textarea>
+        <button class="primary" id="iv-btn">Get feedback</button>
+        <div id="iv-result"></div>
+      </div>
+
+      <div class="panel" id="panel-chat">
+        <div class="chips quick" id="quick-prompts">
+          <button class="chip">What skills am I missing for this internship?</button>
+          <button class="chip">What questions might they ask me?</button>
+          <button class="chip">Which of my projects should I highlight for this job?</button>
+          <button class="chip">Write a short cover letter for this job.</button>
+        </div>
+        <div class="chat-log" id="chat-log"></div>
+        <form class="chat-form" id="chat-form">
+          <input id="chat-input" type="text" placeholder="Ask anything about your CV or this job" autocomplete="off">
+          <button class="primary" type="submit">Send</button>
+        </form>
+      </div>
+
+      <div class="panel" id="panel-jobs">
+        <p class="hint">Search live job postings to see which skills employers are asking for, how well each posting matches your CV, and what to learn next.</p>
+        <form class="row" id="jobs-form">
+          <input id="jobs-query" type="text" placeholder="e.g. software engineering intern" required>
+          <input id="jobs-location" type="text" value="Sri Lanka">
+          <button class="primary" type="submit">Search</button>
+        </form>
+        <div id="jobs-result"></div>
+      </div>
+    </section>
+  </main>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>

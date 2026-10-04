@@ -1,0 +1,16 @@
+Software Engineering Intern (6 months), Colombo
+
+We are looking for enthusiastic undergraduates to join our product engineering team.
+
+Responsibilities
+- Build and maintain features in our React and TypeScript web application
+- Develop REST APIs with Node.js and Express.js
+- Write unit tests and take part in code reviews
+- Work in an Agile team using Jira and two-week sprints
+
+Requirements
+- Undergraduate in Computer Science, Software Engineering or a related field
+- Good knowledge of JavaScript and OOP concepts
+- Familiarity with React, Git and SQL databases such as PostgreSQL
+- Exposure to Docker or AWS is a plus
+- Good communication skills and teamwork

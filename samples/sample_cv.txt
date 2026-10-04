@@ -1,0 +1,30 @@
+Nimali Perera
+Colombo, Sri Lanka | nimali.perera@example.com | github.com/nimali-dev
+
+EDUCATION
+BSc (Hons) in Computer Science, University of Colombo School of Computing (2023 - present)
+Current GPA: 3.52 / 4.00
+G.C.E. Advanced Level (2021), Physical Science stream: A, A, B
+
+SKILLS
+Languages: Python, Java, JavaScript, SQL
+Web: HTML, CSS, React
+Tools: Git, GitHub, Figma, Linux
+
+PROJECTS
+Campus Event Hub (React, Firebase)
+Made a website for our university club where members can register for events and get reminders.
+
+Paddy Price Predictor (Python, Pandas, scikit-learn)
+Used past market data from the Department of Census and Statistics to predict paddy prices
+for the next month. Did data cleaning and trained a linear regression model.
+
+Library Management System (Java, MySQL)
+Group project for second year. I did the database design and the book borrowing module.
+
+EXPERIENCE
+Volunteer, IEEE Student Branch (2024 - present)
+Helped organise a 200-person coding competition and handled registrations.
+
+ACHIEVEMENTS
+Finalist, university inter-faculty hackathon 2024
