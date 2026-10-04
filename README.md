@@ -20,7 +20,7 @@ Your CV is never uploaded to a cloud AI service.
 | Rewrite | Turns a rough project description into a polished paragraph and action-verb CV bullets, using `[X%]` placeholders instead of invented numbers |
 | Interview practice | Answer a question (one click from the generated list) and get a score, feedback, and a stronger answer that only uses facts from your CV |
 | Ask JobPilot | Free-form chat grounded in your CV and the job description, streamed token by token |
-| Find jobs | Live job postings via SerpApi (optional). Shows which skills employers are asking for across all the postings (green = on your CV, orange = not yet), ranks each posting by how well it matches your CV, and asks Gemma for a learning plan: the 3 most-requested skills you're missing, with a weekend-sized first step for each |
+| Find jobs | Live job postings via SerpApi (optional). Shows which skills employers are asking for across all the postings (blue = on your CV, yellow = not yet), ranks each posting by how well it matches your CV, and asks Gemma for a learning plan: the 3 most-requested skills you're missing, with a weekend-sized first step for each |
 
 ## Architecture
 

@@ -350,7 +350,7 @@ function renderDemand(search, demand) {
   }, hasCv ? "What should I learn next?" : "Summarise what employers want");
 
   return box(`What employers are asking for right now (${demand.postings} live postings)`,
-    hasCv ? el("p", { class: "hint" }, "Green: already on your CV. Orange: not on your CV yet.") : null,
+    hasCv ? el("p", { class: "hint" }, "Blue: already on your CV. Yellow: not on your CV yet.") : null,
     el("div", { class: "bars" }, demand.skills.map((s) => el("div", { class: "bar-row" },
       el("span", { class: "bar-label" }, s.skill),
       el("span", { class: "bar-track" },

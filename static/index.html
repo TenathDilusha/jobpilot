@@ -4,28 +4,43 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>JobPilot · Career Assistant for Sri Lankan Students</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
   <link rel="stylesheet" href="/static/styles.css">
 </head>
 <body>
   <header class="topbar">
-    <div class="brand">
-      <span class="logo">J</span>
-      <div>
-        <h1>JobPilot</h1>
-        <p>Career assistant for Sri Lankan university students</p>
-      </div>
-    </div>
-    <div class="header-controls">
-      <label class="toggle" title="Use the smaller Gemma model: much faster on laptops, less detailed answers">
-        <input type="checkbox" id="fast-mode"> ⚡ Fast mode
-      </label>
-      <div class="status" id="status" hidden>
-        <span class="dot"></span><span id="status-text"></span>
+    <div class="topbar-inner">
+      <a class="brand" href="/">
+        <span class="logo">J</span>
+        <span class="wordmark">JobPilot</span>
+      </a>
+      <div class="header-controls">
+        <div class="status" id="status" hidden>
+          <span class="dot"></span><span id="status-text"></span>
+        </div>
+        <label class="switch" title="Use the smaller Gemma model: much faster on laptops, less detailed answers">
+          <input type="checkbox" id="fast-mode">
+          <span class="track"><span class="thumb"></span></span>
+          <span class="switch-label">Fast mode</span>
+        </label>
       </div>
     </div>
   </header>
 
-  <p class="privacy">🔒 Your CV never leaves this laptop. JobPilot runs an open-weight Gemma model locally with Ollama.</p>
+  <section class="hero">
+    <div class="hero-inner">
+      <span class="eyebrow">For Sri Lankan university students</span>
+      <h1>Know exactly what to fix<br>before you apply.</h1>
+      <p class="lead">Compare your CV with any internship, close your skill gaps and practise the interview, with an AI career coach that runs privately on your laptop.</p>
+      <ul class="trust">
+        <li>Your CV never leaves this laptop</li>
+        <li>Powered by Gemma, running locally</li>
+        <li>Free, and works offline</li>
+      </ul>
+    </div>
+  </section>
 
   <main class="layout">
     <section class="inputs">
@@ -33,7 +48,8 @@
         <h2><span class="step">1</span> Your CV</h2>
         <label class="upload">
           <input type="file" id="cv-file" accept=".pdf,.docx,.txt,.md">
-          <span>Upload PDF, DOCX or TXT</span>
+          <span class="upload-icon" aria-hidden="true">↑</span>
+          <span class="upload-text"><strong>Upload your CV</strong><small>PDF, DOCX or TXT, up to 5 MB</small></span>
         </label>
         <textarea id="cv-text" rows="10" placeholder="…or paste your CV text here"></textarea>
         <div class="chips" id="cv-skills"></div>
@@ -97,15 +113,20 @@
 
       <div class="panel" id="panel-jobs">
         <p class="hint">Search live job postings to see which skills employers are asking for, how well each posting matches your CV, and what to learn next.</p>
-        <form class="row" id="jobs-form">
-          <input id="jobs-query" type="text" placeholder="e.g. software engineering intern" required>
-          <input id="jobs-location" type="text" value="Sri Lanka">
+        <form class="searchbar" id="jobs-form">
+          <input id="jobs-query" class="field-search" type="text" placeholder="Job title or keywords" required>
+          <span class="divider" aria-hidden="true"></span>
+          <input id="jobs-location" class="field-location" type="text" value="Sri Lanka">
           <button class="primary" type="submit">Search</button>
         </form>
         <div id="jobs-result"></div>
       </div>
     </section>
   </main>
+
+  <footer class="footer">
+    JobPilot runs Gemma locally with Ollama. Open source under the MIT license.
+  </footer>
 
   <script src="/static/app.js"></script>
 </body>
