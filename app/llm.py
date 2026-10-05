@@ -71,11 +71,13 @@ class OllamaClient:
         temperature: float = 0.2,
         model: str | None = None,
     ) -> dict:
-        content = await self.chat(messages, schema=schema, temperature=temperature, model=model)
-        try:
-            return json.loads(content)
-        except json.JSONDecodeError as exc:
-            raise LLMError("The model returned malformed JSON. Please try again.") from exc
+        for attempt in range(2):
+            content = await self.chat(messages, schema=schema, temperature=temperature, model=model)
+            try:
+                return json.loads(content)
+            except json.JSONDecodeError as exc:
+                if attempt:
+                    raise LLMError("The model returned malformed JSON. Please try again.") from exc
 
     async def stream_chat(
         self, messages: list[dict], temperature: float = 0.4, model: str | None = None

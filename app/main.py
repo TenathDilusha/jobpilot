@@ -8,6 +8,7 @@ from pydantic import BaseModel, Field
 
 from . import config, prompts
 from .cv_parser import UnsupportedFileError, extract_text
+from .guard import verify_analysis, verify_rewrite
 from .jobs import JobSearchError, job_text, search_jobs
 from .llm import LLMError, OllamaClient, get_llm
 from .skills import compare, extract_skills, skill_demand
@@ -115,8 +116,9 @@ async def match(req: DocumentsRequest):
 async def analyze(req: DocumentsRequest, llm: OllamaClient = Depends(get_llm)):
     keyword_match = compare(req.cv_text, req.job_description)
     messages = prompts.analysis_messages(req.cv_text, req.job_description, keyword_match)
-    ai = await _run_json(llm, messages, prompts.ANALYSIS_SCHEMA, req.model)
-    return {"keyword_match": keyword_match, "ai": ai}
+    schema = prompts.analysis_schema(require_strengths=bool(keyword_match["matched"]))
+    ai = await _run_json(llm, messages, schema, req.model)
+    return {"keyword_match": keyword_match, "ai": verify_analysis(ai, req.cv_text)}
 
 
 @app.post("/api/interview/questions")
@@ -134,7 +136,8 @@ async def interview_feedback(req: FeedbackRequest, llm: OllamaClient = Depends(g
 @app.post("/api/rewrite")
 async def rewrite(req: RewriteRequest, llm: OllamaClient = Depends(get_llm)):
     messages = prompts.rewrite_messages(req.text, req.target_role, req.job_description)
-    return await _run_json(llm, messages, prompts.REWRITE_SCHEMA, req.model, temperature=0.5)
+    result = await _run_json(llm, messages, prompts.REWRITE_SCHEMA, req.model, temperature=0.5)
+    return verify_rewrite(result, req.text)
 
 
 @app.post("/api/chat")

@@ -63,6 +63,13 @@ ANALYSIS_SCHEMA = {
     "required": ["summary", "fit_score", "strengths", "missing_skills", "cv_improvements"],
 }
 
+
+def analysis_schema(require_strengths: bool) -> dict:
+    if not require_strengths:
+        return ANALYSIS_SCHEMA
+    strengths = {**ANALYSIS_SCHEMA["properties"]["strengths"], "minItems": 1}
+    return {**ANALYSIS_SCHEMA, "properties": {**ANALYSIS_SCHEMA["properties"], "strengths": strengths}}
+
 # Every generated token costs ~0.2 s on a CPU-only laptop, so outputs are kept deliberately short.
 BREVITY = "Keep every text field to one short sentence."
 
@@ -117,7 +124,9 @@ def questions_messages(cv_text: str, job_description: str) -> list[dict]:
 
 You are interviewing this student for this role. Return JSON with questions: 5 questions you \
 would most likely ask (2 technical about the job's requirements, 2 about specific projects \
-named in the CV, 1 behavioral), each with a short tip for answering well.
+named in the CV, 1 behavioral), each with a short tip for answering well. Technical questions \
+may test skills the CV lacks, but never say the student mentioned or used something the CV \
+does not show.
 
 {BREVITY}"""
     return [{"role": "system", "content": SYSTEM_PROMPT}, {"role": "user", "content": user}]
@@ -151,7 +160,10 @@ Return JSON with:
 - rewritten: a polished 2-4 sentence description that leads with impact and names the technologies.
 - bullets: 3-4 CV bullet points that start with strong action verbs. Where a number would help \
 but the original has none, insert a placeholder like [X users] or [Y%] instead of inventing one.
-- notes: 2-3 short suggestions about what the student should add (metrics, links, their own role)."""
+- notes: 2-3 short suggestions about what the student should add (metrics, links, their own role).
+
+Only describe what the original says. Never add technologies, methods, teamwork or results it \
+does not mention; put those in notes as questions for the student instead."""
     user += "\n\nKeep each bullet and note to one sentence."
     return [{"role": "system", "content": SYSTEM_PROMPT}, {"role": "user", "content": user}]
 

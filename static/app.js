@@ -180,7 +180,7 @@ function renderGaps(ai) {
         el("div", {}, el("em", {}, "How to learn: "), g.how_to_learn),
       )),
     ),
-    box("Make your CV stronger for this job", list(ai.cv_improvements)),
+    ai.cv_improvements.length ? box("Make your CV stronger for this job", list(ai.cv_improvements)) : null,
   );
 }
 
